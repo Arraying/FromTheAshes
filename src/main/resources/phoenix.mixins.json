@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "ExampleMixin"
+    "HUDMixin",
+    "KeyboardMixin"
   ],
   "injectors": {
     "defaultRequire": 1
