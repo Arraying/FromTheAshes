@@ -2,6 +2,7 @@ package de.arraying.phoenix;
 
 import de.arraying.phoenix.services.HUDService;
 import de.arraying.phoenix.services.KeyboardService;
+import de.arraying.phoenix.services.ZoomService;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ public class PhoenixMod implements ModInitializer {
     private static PhoenixMod instance;
     private HUDService hudService;
     private KeyboardService keyboardService;
+    private ZoomService zoomService;
 
 	@Override
 	public void onInitialize() {
@@ -19,6 +21,7 @@ public class PhoenixMod implements ModInitializer {
 		LOGGER.info("Phoenix rising from the ashes");
         this.hudService = new HUDService();
         this.keyboardService = new KeyboardService();
+        this.zoomService = new ZoomService();
 	}
 
     public static PhoenixMod getInstance() {
@@ -31,6 +34,10 @@ public class PhoenixMod implements ModInitializer {
 
     public KeyboardService getKeyboardService() {
         return keyboardService;
+    }
+
+    public ZoomService getZoomService() {
+        return zoomService;
     }
 
 }
