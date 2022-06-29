@@ -17,9 +17,13 @@ public class HUDService extends Service {
             return;
         }
         int height = textRenderer.fontHeight;
+        String fps = MinecraftClient.getInstance().fpsDebugString;
+        if (fps.indexOf(' ') != -1) {
+            fps = fps.substring(0, fps.indexOf(' '));
+        }
         textRenderer.draw(
             matrices,
-            "FPS: ",
+            "FPS: " + fps,
             5,
             VERTICAL_OFFSET + height,
             -1

@@ -6,7 +6,7 @@ import org.lwjgl.glfw.GLFW;
 public class KeyboardService extends Service {
 
     public void keypress(int key, int action) {
-        if (action == GLFW.GLFW_RELEASE && key == GLFW.GLFW_KEY_LEFT_ALT) {
+        if (action == GLFW.GLFW_RELEASE && key == GLFW.GLFW_KEY_RIGHT_SHIFT) {
             PhoenixMod.getInstance().getHudService().toggleHUD();
         }
     }
