@@ -1,9 +1,19 @@
-# Fabric Example Mod
+# Phoenix
 
-## Setup
+A mod that introduces quality of life changes.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+### HUD
 
-## License
+The HUD is the centerpiece of Phoenix. It provides the following information:
+- Current FPS
+- X, Y, Z coordinates
+- Direction facing and which axis this is
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+The HUD can be toggled using `RSHIFT`, and is disabled when debug information is shown.
+
+### Zoom
+
+OptiFine-esque zoom that will set the FOV to 1/3rd of what it used to be.
+While zoomed in, smooth movement is enabled.
+
+Zoom mode is enabled as long as `C` is held down.
