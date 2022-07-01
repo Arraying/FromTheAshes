@@ -5,6 +5,7 @@ import de.arraying.phoenix.models.HUDEntry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Direction;
@@ -17,8 +18,10 @@ import java.util.function.Function;
 public class HUDService extends Service {
 
     private static final float MARGIN_VERTICAL_SPACING = 0.02f;
+    private static final double GAMMA_ADJUSTMENT = 150.0d;
     private final HUDBox[] topLeftHUDs;
     private boolean shouldRender = true;
+    private boolean gammaEnabled = false;
 
     /**
      * Pre-loads the entire HUD for performance reasons.
@@ -102,6 +105,20 @@ public class HUDService extends Service {
      */
     public void toggleHUD() {
         this.shouldRender = !shouldRender;
+    }
+
+    /**
+     * Toggles fullbright.
+     */
+    public void toggleGamma() {
+        GameOptions options = MinecraftClient.getInstance().options;
+        if (!gammaEnabled) {
+            options.gamma = GAMMA_ADJUSTMENT * options.gamma;
+            this.gammaEnabled = true;
+        } else {
+            options.gamma = options.gamma / GAMMA_ADJUSTMENT;
+            this.gammaEnabled = false;
+        }
     }
 
     /**
