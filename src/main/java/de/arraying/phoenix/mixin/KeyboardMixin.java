@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Keyboard.class)
 public class KeyboardMixin {
 
-    @Inject(at = @At("HEAD"), method = "onKey")
+    @Inject(at = @At("TAIL"), method = "onKey")
     public void onKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo callbackInfo) {
         PhoenixMod.getInstance().getKeyboardService().keypress(key, action);
     }
