@@ -1,24 +1,38 @@
 package de.arraying.phoenix.models;
 
-import de.arraying.phoenix.PhoenixMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 
+/**
+ * Represents a HUD box that groups rows of information (items).
+ */
 public class HUDBox {
 
     private static final float MARGIN_HORIZONTAL_SPACING = 0.02f;
     private static final int MARGIN_VERTICAL_SPACING = 5;
     private final HUDEntry[] items;
 
-    public HUDBox(HUDEntry... items) {
+    /**
+     * Creates a new HUD box.
+     * @param items A list of non-null items to display.
+     * @throws IllegalArgumentException If 0 items have been provided.
+     */
+    public HUDBox(HUDEntry... items) throws IllegalArgumentException {
         if (items.length == 0) {
             throw new IllegalArgumentException("at least one item required");
         }
         this.items = items;
     }
 
+    /**
+     * Renders the box.
+     * @param horizontalOrigin The X coordinate to start rendering from.
+     * @param verticalOrigin The Y coordinate to start rendering from.
+     * @param matrices The matrix stack.
+     * @return The Y coordinate of the end of the box, such that renders can be chained.
+     */
     public int render(int horizontalOrigin, int verticalOrigin, MatrixStack matrices) {
         MinecraftClient client = MinecraftClient.getInstance();
         TextRenderer textRenderer = client.textRenderer;
@@ -60,6 +74,10 @@ public class HUDBox {
         return endBoxY;
     }
 
+    /**
+     * Gets the text to render from all items as string.
+     * @return The text.
+     */
     private String[] getText() {
         String[] text = new String[items.length];
         for (int i = 0; i < text.length; i++) {
@@ -68,6 +86,11 @@ public class HUDBox {
         return text;
     }
 
+    /**
+     * Gets the longest string from all strings.
+     * @param text An array of string.
+     * @return The longest text.
+     */
     private String getLongestText(String[] text) {
         String maximum = "";
         for (String info : text) {

@@ -7,6 +7,9 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The mod itself.
+ */
 public class PhoenixMod implements ModInitializer {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("phoenix");
@@ -15,6 +18,9 @@ public class PhoenixMod implements ModInitializer {
     private KeyboardService keyboardService;
     private ZoomService zoomService;
 
+    /**
+     * When the mod gets initialized.
+     */
 	@Override
 	public void onInitialize() {
         instance = this;
@@ -24,18 +30,34 @@ public class PhoenixMod implements ModInitializer {
         this.zoomService = new ZoomService();
 	}
 
+    /**
+     * Singleton getter.
+     * @return The mod instance.
+     */
     public static PhoenixMod getInstance() {
         return instance;
     }
 
+    /**
+     * Service getter.
+     * @return The service.
+     */
     public HUDService getHudService() {
         return hudService;
     }
 
+    /**
+     * Service getter.
+     * @return The service.
+     */
     public KeyboardService getKeyboardService() {
         return keyboardService;
     }
 
+    /**
+     * Service getter.
+     * @return The service.
+     */
     public ZoomService getZoomService() {
         return zoomService;
     }

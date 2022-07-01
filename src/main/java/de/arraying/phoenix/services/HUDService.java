@@ -11,13 +11,19 @@ import net.minecraft.util.math.Direction;
 
 import java.util.function.Function;
 
+/**
+ * Responsible for all HUD operations.
+ */
 public class HUDService extends Service {
 
     private static final float MARGIN_VERTICAL_SPACING = 0.02f;
     private final HUDBox[] topLeftHUDs;
     private boolean shouldRender = true;
 
-    // Load everything here for performance.
+    /**
+     * Pre-loads the entire HUD for performance reasons.
+     * That way, there do not need to be instantiations at every frame.
+     */
     public HUDService() {
         topLeftHUDs = new HUDBox[] {
             // Performance related statistics.
@@ -73,6 +79,11 @@ public class HUDService extends Service {
         };
     }
 
+    /**
+     * Renders the HUD.
+     * This just renders all the HUD boxes.
+     * @param matrices The matrix stack.
+     */
     public void renderHUD(MatrixStack matrices) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null || !shouldRender || MinecraftClient.getInstance().options.debugEnabled) {
@@ -84,47 +95,20 @@ public class HUDService extends Service {
         for (HUDBox hudBox : topLeftHUDs) {
             offsetTopLeft = hudBox.render(0, offsetTopLeft, matrices);
         }
-
-//        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-//        int height = textRenderer.fontHeight;
-//        String fps = MinecraftClient.getInstance().fpsDebugString;
-//        if (fps.indexOf(' ') != -1) {
-//            fps = fps.substring(0, fps.indexOf(' '));
-//        }
-//        textRenderer.draw(
-//            matrices,
-//            "FPS: " + fps,
-//            5,
-//            VERTICAL_OFFSET + height,
-//            -1
-//        );
-//        textRenderer.draw(
-//            matrices,
-//            "X: " + player.getBlockX(),
-//            5,
-//            VERTICAL_OFFSET + 2 * height,
-//            -1
-//        );
-//        textRenderer.draw(
-//            matrices,
-//            "Y: " + player.getBlockY(),
-//            5,
-//            VERTICAL_OFFSET + 3 * height,
-//            -1
-//        );
-//        textRenderer.draw(
-//            matrices,
-//            "Z: " + player.getBlockZ(),
-//            5,
-//            VERTICAL_OFFSET + 4 * height,
-//            -1
-//        );
     }
 
+    /**
+     * Toggles the HUD.
+     */
     public void toggleHUD() {
         this.shouldRender = !shouldRender;
     }
 
+    /**
+     * Helper function to get from a player object to whatever information as a string.
+     * @param function A function to map.
+     * @return A string representation of something the player has/does.
+     */
     private String playerToString(Function<ClientPlayerEntity, Object> function) {
         return String.valueOf(function.apply(MinecraftClient.getInstance().player));
     }

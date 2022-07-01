@@ -3,8 +3,16 @@ package de.arraying.phoenix.services;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
 
+/**
+ * Responsible for key presses.
+ */
 public class KeyboardService extends Service {
 
+    /**
+     * When the keyboard is pressed/released.
+     * @param key The key that was pressed/released.
+     * @param action The action (press/release).
+     */
     public void keypress(int key, int action) {
         MinecraftClient client = MinecraftClient.getInstance();
         // Allowed everywhere.
